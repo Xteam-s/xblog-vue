@@ -11,13 +11,13 @@
           <router-link to="/x/bloggers">Blogger</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/about">About</router-link>
-        </li>
-        <li class="top-bar-link">
           <router-link to="/x/recent">RecentBlog</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/blog/abc">abc's blog</router-link>
+          <router-link to="/x/about">About</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/links">Links</router-link>
         </li>
       </ul>
 
@@ -48,7 +48,7 @@
         this.loginInfo = loginInfo;
       })
     }
-    //
+    //动画有问题
     // created(){
     //   this.axios(
     //     '/blogger/current'
