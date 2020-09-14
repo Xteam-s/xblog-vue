@@ -5,11 +5,11 @@ import axios from "axios";
 import qs from "qs";
 
 // Full config:  https://github.com/axios/axios#request-config
-axios.defaults.baseURL = 'http://127.0.0.1/api'
+axios.defaults.baseURL = 'http://192.168.43.11.80/api'
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.withCredentials = true;
-axios.defaults.transformRequest = function(data){return qs.stringify(data)}
+axios.defaults.transformRequest = function(data){return data instanceof FormData ? data : qs.stringify(data)}
 
 let config = {
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
