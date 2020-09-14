@@ -2,7 +2,7 @@
 <div class="main">
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
-      <image id="downBtn" class="downBtn" v-on:click="downScroll" src="../../assets/img/downBtn.png"></image>
+      <div id="downBtn" class="downBtn" @click="downScroll()"></div>
       <div class="custom-background-img"></div>
     </div>
     <div class="container">

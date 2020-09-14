@@ -2,9 +2,9 @@
   <div class="main">
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
-      <image id="downBtn" class="downBtn" onclick="downScroll()" src="../../resources/downBtn.png"></image>
+      <div id="downBtn" class="downBtn" @click="downScroll()"></div>
       <div class="custom-background-img"></div>
-    </div>>
+    </div>
     <div id="index-links" class="index-links">
       <div class="xtitle">
         Links

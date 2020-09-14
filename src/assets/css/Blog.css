@@ -57,6 +57,8 @@ body {
   position: absolute;
   left: 50%;
   top: 92%;
+  background: url("../../assets/img/downBtn.png") no-repeat center;
+  background-size: cover;
   transform: translate(-50%,-50%);
   height: 80px;
   width: 80px;
