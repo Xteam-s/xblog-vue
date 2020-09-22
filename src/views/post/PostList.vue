@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import Markdown from "../components/EditorMD";
+    import Markdown from "@/components/editormd/EditorMD";
     export default {
     components: {
         Markdown
