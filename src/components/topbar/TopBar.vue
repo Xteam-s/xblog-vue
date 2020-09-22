@@ -14,10 +14,13 @@
           <router-link to="/x/recent">RecentBlog</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/about">About</router-link>
+          <router-link to="/x/editor">Editor</router-link>
         </li>
         <li class="top-bar-link">
           <router-link to="/x/links">Links</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/home">Home</router-link>
         </li>
       </ul>
 
@@ -76,7 +79,7 @@
     width: 100%;
     box-shadow: #eee 0 1px 5px;
     background: #ffffff;
-    z-index: 1000;
+    z-index: 10000;
   }
 
   .top-nav-list {

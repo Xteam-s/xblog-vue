@@ -4,9 +4,10 @@ import VueRouter from "vue-router";
 const Home = () => import('../views/home/Home')
 const Links = () => import('../views/links/Links')
 const About = () => import('../views/about/About')
-const PostList = () => import('../views/post/PostList')
+//const PostList = () => import('../views/post/PostList')
 const Login = () => import('../views/login/Login')
 const Blog = () => import('../views/Blog/Blog')
+const Editor = () => import('../views/editor/Editor')
 
 Vue.use(VueRouter)
 
@@ -32,9 +33,13 @@ const routes = [
     component: About
   },
   {
-    path: '/x/post',
-    component: PostList
+    path: '/x/editor',
+    component: Editor
   },
+  // {
+  //   path: '/x/blog/:blogUrl',
+  //   component: PostList
+  // },
   {
     path: '/x/login',
     component: Login
