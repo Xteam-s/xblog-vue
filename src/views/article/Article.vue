@@ -4,7 +4,7 @@
         <div class="xtitle">
             {{article.title}}
         </div>
-        <div class="icon-warp">
+        <div class="icon-warp" style="width : 100%; margin : 0 auto; justify-content : center">
             <img class="icon" src="../../assets/img/main_icon/bloger.svg"/>
             <p id="icon-text">{{article.author}}</p>
             <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
@@ -16,18 +16,19 @@
             <img class="icon" src="../../assets/img/main_icon/visits.svg"/>
             <p id="icon-text">{{article.views}}</p>
         </div>
-        <div class="markdown-box">
-            <textarea id="markdown-box" style="display:none;" v-model="article.content"></textarea>
-        </div>
+        <v-editor></v-editor>
     </div>
   </div>
 </template>
 
 <script>
-  import $script from 'scriptjs';
+  import vEditor from '@/components/editormd/EditorMD';
 
   export default {
     name: "Article",
+    components: {
+      vEditor
+    },
     data() {
         return {
           article: {
@@ -45,41 +46,42 @@
          }
         }
     },
-    method: {
-      init() {
-        editormd.markdownToHTML("markdown-box", {
-          path: '/static/editor.md/lib/',
-          //markdown        : markdown ,//+ "\r\n" + $("#append-test").text(),
-          //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
-          htmlDecode      : "style,script,iframe",  // you can filter tags decode
-          //toc             : false,
-          tocm            : true,    // Using [TOCM]
-          //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
-          //gfm             : false,
-          //tocDropdown     : true,
-          // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
-          emoji           : true,
-          taskList        : true,
-          tex             : true,  // 默认不解析
-          flowChart       : true,  // 默认不解析
-          sequenceDiagram : true,  // 默认不解析
-        })
-      }
-    },
     mounted() {
-      $script([
-        `/static/editor.md/examples/js/jquery.min.js`,
-        `/static/editor.md/examples/js/zepto.min.js`
-      ], () => {
-        $script(`/static/editor.md/editormd.min.js`, () => {
-          this.init();
-        });
-      });
-    }
+    // debugger
+      this.$nextTick(()=> {
+        var that = this;
+        setTimeout(() => {
+          document.querySelector(".editormd-html-textarea").value = that.article.content;
+          console.log(that.article.content);
+        }, 150)
+      })
+    },
+    
   }
+    
   console.log("ok");
 </script>
 
-<style scoped>
+<style scope>
     @import '../../assets/css/Blog.css';
+
+    .editormd-toolbar {
+      display: none !important;
+    }
+
+    .CodeMirror-scroll, .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty {
+      display: none !important;
+    }
+
+    .editormd, .editormd-vertical {
+      border: none !important;
+    }
+
+    .markdown-view-box {
+      width: 85vw;
+    }
+
+    .editormd-preview {
+      width: 100% !important;
+    }
 </style>
