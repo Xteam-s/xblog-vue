@@ -8,6 +8,7 @@ const About = () => import('../views/about/About')
 const Login = () => import('../views/login/Login')
 const Blog = () => import('../views/Blog/Blog')
 const Editor = () => import('../views/editor/Editor')
+const Article = () => import('../views/article/Article')
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,10 @@ const routes = [
   {
     path: '/x/login',
     component: Login
+  },
+  {
+    path: '/x/article',
+    component: Article
   }
 ]
 

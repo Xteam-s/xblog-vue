@@ -46,7 +46,7 @@
           <div class="articles">
             <div v-for="(article,index) in articleList" :key = "index" class="article">
               <div class="article-card-front">
-                <a href="" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></a>
+                <router-link to="/x/article" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
                 <div>
                   <span class="article-title">{{article.title}}</span>
                   <p class="article-abstract">{{article.abstract}}</p>
@@ -214,5 +214,5 @@ export default {
 </script>
 
 <style lang="css">
-  @import '../../assets/css/Blog.css'
+  @import '../../assets/css/Blog.css';
 </style>
