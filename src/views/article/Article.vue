@@ -4,7 +4,7 @@
         <div class="xtitle">
             {{article.title}}
         </div>
-        <div class="icon-warp" style="width : 100%; margin : 0 auto; justify-content : center">
+        <div class="icon-warp" style="width : 100%; margin : 0 auto; justify-content : center; padding: 0 0 4vh 0">
             <img class="icon" src="../../assets/img/main_icon/bloger.svg"/>
             <p id="icon-text">{{article.author}}</p>
             <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
@@ -16,7 +16,7 @@
             <img class="icon" src="../../assets/img/main_icon/visits.svg"/>
             <p id="icon-text">{{article.views}}</p>
         </div>
-        <v-editor></v-editor>
+        <v-editor :content = "article.content"></v-editor>
     </div>
   </div>
 </template>
@@ -47,14 +47,7 @@
         }
     },
     mounted() {
-    // debugger
-      this.$nextTick(()=> {
-        var that = this;
-        setTimeout(() => {
-          document.querySelector(".editormd-html-textarea").value = that.article.content;
-          console.log(that.article.content);
-        }, 150)
-      })
+    
     },
     
   }
@@ -65,23 +58,27 @@
 <style scope>
     @import '../../assets/css/Blog.css';
 
-    .editormd-toolbar {
-      display: none !important;
-    }
+  .markdown-view-box {
+    width: 83vw !important;
+  }
 
-    .CodeMirror-scroll, .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty {
-      display: none !important;
-    }
+  .editormd-preview {
+    width: 100% !important;
+  }
 
-    .editormd, .editormd-vertical {
+  .editormd, .editormd-vertical {
       border: none !important;
-    }
+  }
 
-    .markdown-view-box {
-      width: 85vw;
-    }
+  .editormd-toolbar {
+    display: none !important;
+  }
 
-    .editormd-preview {
-      width: 100% !important;
-    }
+  .CodeMirror-scroll {
+    display: none !important;
+  }
+
+  .CodeMirror-scroll, .CodeMirror, .cm-s-default, .CodeMirror-wrap, .CodeMirror-empty {
+      display: none !important;
+  }
 </style>

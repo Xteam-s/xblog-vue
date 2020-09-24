@@ -40,6 +40,10 @@
             },
           };
         }
+      },
+      content: {
+        type: String,
+        required: true
       }
     },
     data(){
@@ -54,6 +58,7 @@
           if (editorMD) {
             // Vue 异步执行 DOM 更新，template 里面的 script 标签异步创建
             // 所以，只能在 nextTick 里面初始化 editor.md
+            this.editorConfig.markdown = this.content;
             this.editor = editorMD('test-editor', this.editorConfig);
           }
         });
