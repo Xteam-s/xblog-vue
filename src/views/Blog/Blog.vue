@@ -2,7 +2,7 @@
 <div class="main">
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
-      <div id="downBtn" class="downBtn" v-on:click="downScroll"></div>
+      <div id="downBtn" class="downBtn" @click="downScroll"></div>
       <div class="custom-background-img"></div>
     </div>
     <div class="container">
@@ -213,6 +213,6 @@ export default {
 
 </script>
 
-<style lang="css">
+<style scoped>
   @import '../../assets/css/Blog.css';
 </style>

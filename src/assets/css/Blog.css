@@ -1,29 +1,29 @@
-/*
+
 @font-face{
   font-family: BlackOpsOne;
-  src: url("../../../../fonts/BlackOpsOne/BlackOpsOne-Regular.ttf");
+  src: url("../../assets/fonts/BlackOpsOne/BlackOpsOne-Regular.ttf");
 }
 @font-face{
   font-family: Bungee;
-  src: url("../../../../fonts/Bungee/Bungee-Regular.ttf");
+  src: url("../../assets/fonts/Bungee/Bungee-Regular.ttf");
 }
-@font-face{
+/* @font-face{
   font-family: BungeeInline;
-  src: url("../../../../fonts/BungeeInline/BungeeInline-Regular.ttf");
-}
-@font-face{
+  src: url("../../assets/fonts/BungeeInline/BungeeInline-Regular.ttf");
+} */
+/* @font-face{
   font-family: BungeeShade;
-  src: url("../../../../fonts/BungeeShade/BungeeShade-Regular.ttf");
-}
-@font-face{
+  src: url("../../assets/fonts/BungeeShade/BungeeShade-Regular.ttf");
+} */
+/* @font-face{
   font-family: Monoton;
-  src: url("../../../../fonts/Monoton/Monoton-Regular.ttf")
-}
+  src: url("../../assets/fonts/Monoton/Monoton-Regular.ttf")
+} */
 @font-face{
   font-family: Ch_F1;
-  src: url("../../../../fonts/Ch_F1/Ch_F1.otf");
+  src: url("../../assets/fonts/Ch_F1/Ch_F1.otf");
 }
-*/
+
 
 html,
 body {
@@ -33,6 +33,7 @@ body {
 .main {
   padding-bottom: 80px;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,7 +127,7 @@ body {
 }
 
 
-.main .index-links {
+.main .index-links, .index-links {
   padding: 10px;
   padding-bottom: 20px;
   margin-top: 10px;

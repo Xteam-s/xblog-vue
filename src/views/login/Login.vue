@@ -1,16 +1,20 @@
 <template>
+  <div class="login-wrapper">
+    <div class="index-links" style="">
+      <div class="title">登录</div>
+      <div><p>Username:</p><input type="text" v-model="username"></div>
+      <div><p>Password:</p><input type="password" v-model="password"></div>
+      <div class="submit-wrapper">
+        <button @click="submit">登录</button>
+      </div>
+    </div>
+    <!-- <input name="file" type="file" accept="image/*" @change="uploadFile"> -->
+    <!--Content: <textarea name="" id="content" cols="30" rows="10" v-model="content"></textarea>-->
+    <!-- Summary: <textarea name="" id="summary" cols="30" rows="10" v-model="summary"></textarea> -->
+    <!-- Tags: <input type="text" v-model="tags"> -->
+    <!-- <button @click="savePost">保存文章</button> -->
 
-  <div>
-    Username:<input type="text" v-model="username">
-    Password:<input type="text" v-model="password">
-    <button @click="submit">tijiao</button>
-    <input name="file" type="file" accept="image/*" @change="uploadFile">
-<!--    Content: <textarea name="" id="content" cols="30" rows="10" v-model="content"></textarea>-->
-    Summary: <textarea name="" id="summary" cols="30" rows="10" v-model="summary"></textarea>
-    Tags: <input type="text" v-model="tags">
-    <button @click="savePost">保存文章</button>
-
-    <mavon-editor v-model="content" :toolbars="toolbars" :ishljs="true" :scrollStyle="true"></mavon-editor>
+    <!-- <mavon-editor v-model="content" :toolbars="toolbars" :ishljs="true" :scrollStyle="true"></mavon-editor> -->
   </div>
 </template>
 
@@ -107,5 +111,66 @@
 </script>
 
 <style scoped>
+    @import '../../assets/css/Blog.css';
 
+    .login-wrapper {
+      width: 100%;
+      height: 92vh;
+      margin: 0;
+      padding: 0;
+      background: url("../../assets/img/bg.jpg") center no-repeat;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .index-links {
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%, -50%);
+
+      width: 30vw;
+      height: 60vh;
+      padding: 3vh 0 0 6vw;
+    }
+
+    .login-wrapper .index-links .title {
+      font-size: 2.5vw;
+      font-weight: bold;
+    }
+
+    .index-links div {
+      padding: 2vh 0 2vh 0;
+    }
+
+    .index-links div input {
+      width: 80%;
+      border: 1px solid #bbb;
+      border-radius: 3px; 
+      margin: 1.5vh 0 0 0;
+      padding: 1vh;
+      font-size: 3vh;
+      font-family: "Microsoft soft";
+    }
+
+    .index-links .submit-wrapper {
+      padding: 5vh 0 0 0;
+    }
+
+    .index-links .submit-wrapper button {
+      position: relative;
+      width: 12vw;
+      height: 6vh;
+      background-color: rgb(52, 152, 219);
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      border: 0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .index-links .submit-wrapper button:hover {
+      background-color: rgba(52, 152, 219, 0.9);
+    }
 </style>
