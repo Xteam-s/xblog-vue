@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <tab-bar :mode="mode" :username="username"></tab-bar>
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
       <div id="downBtn" class="downBtn" @click="downScroll"></div>
@@ -30,10 +31,17 @@
 </template>
 
 <script>
+import TabBar from '@/components/topbar/TopBar';
+
   export default {
     name: "Links",
+    components: {
+      TabBar
+    },
     data() {
       return {
+        mode: "user",
+        username: "default",
         blogerList: [{ 
           name: 'baidu',
           imgurl: 'https://www.baidu.com/img/flexible/logo/pc/result.png',

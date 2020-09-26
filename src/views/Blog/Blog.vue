@@ -1,5 +1,6 @@
 <template>
-<div class="main">
+  <div class="main">
+    <tab-bar :mode="mode" :username="username"></tab-bar>
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
       <div id="downBtn" class="downBtn" @click="downScroll"></div>
@@ -13,13 +14,13 @@
           <div class="blogers">
             <div v-for="(bloger,index) in blogerList" :key = "index" class="bloger">
               <div class="bloger-card-front">
-                <a :href="bloger.url" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></a>
+                <router-link to="/x/bloger" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
                 <div class="bloger-name">
                   <span>{{bloger.name}}</span>
                 </div>
               </div>
               <div class="bloger-card-back">
-                <a :href="bloger.url" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></a>
+                <router-link to="/x/bloger" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
                 <div class="bloger-intro">
                   <span v-html="bloger.intro"></span>
                 </div>
@@ -68,19 +69,24 @@
           </div>
       </div>
     </div>
- 
 </template>
 
 <script>
+import TabBar from '@/components/topbar/TopBar';
 
 export default {
     name: "BlogList",
+    components: {
+      TabBar
+    },
     data() {
       return {
+          mode: "user",
+          username: "default",
           blogerList: [{ 
             name: 'Neptu',
             imgurl: require('../../assets/img/bloger/avatar.jpg'),
-            url: '/x/blog#/x/bloggers',
+            url: '/x/bloger',
             intro: '简介1111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
             github: 'https://baidu.com',
             email: 'xxxxx@xx',
@@ -91,7 +97,7 @@ export default {
           { 
             name: 'Terminator',
             imgurl: require('../../assets/img/bloger/avatar2.jpg'),
-            url: '',
+            url: '/x/bloger',
             intro: '简介',
             github: '',
             email: 'yyyyy@yy',
@@ -102,7 +108,7 @@ export default {
           { 
             name: 'Xavier',
             imgurl: require('../../assets/img/bloger/avatar4.jpg'),
-            url: '',
+            url: '/x/bloger',
             intro: '简介',
             github: '',
             email: '',

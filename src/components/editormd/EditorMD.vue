@@ -19,7 +19,7 @@
         default() {
           return {
             width: '88%',
-            height: 530,
+            height: 630,
             path: '/static/editor.md/lib/', // Autoload modules mode, codemirror, marked... dependents libs path
             codeFold: true,
             saveHTMLToTextarea: true,

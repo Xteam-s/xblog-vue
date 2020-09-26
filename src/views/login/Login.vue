@@ -1,5 +1,9 @@
 <template>
-  <div class="login-wrapper">
+  <div class="main">
+    <tab-bar :mode="mode" :username="username"></tab-bar>
+    <div class="top-wrap">
+      <div class="custom-background-img"></div>
+    </div>
     <div class="index-links" style="">
       <div class="title">登录</div>
       <div><p>Username:</p><input type="text" v-model="username"></div>
@@ -19,11 +23,18 @@
 </template>
 
 <script>
+  import TabBar from '@/components/topbar/TopBar';
 
   export default {
     name: "Login",
+    components: {
+      TabBar
+    },
     data(){
       return {
+        mode: "user",
+        name: "default",
+
         username: '',
         password: '',
         content: '',
@@ -113,17 +124,11 @@
 <style scoped>
     @import '../../assets/css/Blog.css';
 
-    .login-wrapper {
-      width: 100%;
-      height: 92vh;
-      margin: 0;
-      padding: 0;
-      background: url("../../assets/img/bg.jpg") center no-repeat;
-      background-size: cover;
-      overflow: hidden;
+    .main {
+      height: 100vh;
     }
 
-    .index-links {
+    .main .index-links {
       position: absolute;
       left:50%;
       top:50%;
@@ -134,16 +139,16 @@
       padding: 3vh 0 0 6vw;
     }
 
-    .login-wrapper .index-links .title {
+    .main .index-links .title {
       font-size: 2.5vw;
       font-weight: bold;
     }
 
-    .index-links div {
+    .main .index-links div {
       padding: 2vh 0 2vh 0;
     }
 
-    .index-links div input {
+    .main .index-links div input {
       width: 80%;
       border: 1px solid #bbb;
       border-radius: 3px; 
@@ -153,11 +158,11 @@
       font-family: "Microsoft soft";
     }
 
-    .index-links .submit-wrapper {
+    .main .index-links .submit-wrapper {
       padding: 5vh 0 0 0;
     }
 
-    .index-links .submit-wrapper button {
+    .main .index-links .submit-wrapper button {
       position: relative;
       width: 12vw;
       height: 6vh;
@@ -170,7 +175,7 @@
       overflow: hidden;
     }
     
-    .index-links .submit-wrapper button:hover {
+    .main .index-links .submit-wrapper button:hover {
       background-color: rgba(52, 152, 219, 0.9);
     }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <header class="top-nav">
-    <div class="top-nav-block">
+    <div v-if="mode == 'user'" class="top-nav-block"> <!--user mode for home-->
       <ul class="top-nav-list">
         <li>
           <router-link to="/x/home">
@@ -8,10 +8,74 @@
           </router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/bloggers">Blogger</router-link>
+          <router-link to="/x/blog">Blogger</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/recent">RecentBlog</router-link>
+          <router-link to="/x/archive">Archives</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/category">Categories</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/tag">Tags</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/editor">Editor</router-link> <!--暂留用作调试-->
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/links">Links</router-link>
+        </li>
+      </ul>
+    </div>
+    <div v-if="mode == 'bloger'" class="top-nav-block"> <!--user mode for bloger-->
+      <ul class="top-nav-list">
+        <li>
+          <router-link to="/x/home">
+            <div class="top-nav-logo"></div>
+          </router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/blog">Home</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/bloger">RecentBlog</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/archive">Archives</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/category">Categories</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/tag">Tags</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/about">About</router-link>
+        </li>
+      </ul>
+    </div>
+
+    <div v-if="mode == 'kernel'" class="top-nav-block"> <!--kernel mode (after login)-->
+      <ul class="top-nav-list">
+        <li>
+          <router-link to="/x/home">
+            <div class="top-nav-logo"></div>
+          </router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/home">Home</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/blog">Blogger</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/archive">Archives</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/category">Categories</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/tag">Tags</router-link>
         </li>
         <li class="top-bar-link">
           <router-link to="/x/editor">Editor</router-link>
@@ -19,11 +83,7 @@
         <li class="top-bar-link">
           <router-link to="/x/links">Links</router-link>
         </li>
-        <li class="top-bar-link">
-          <router-link to="/x/home">Home</router-link>
-        </li>
       </ul>
-
     </div>
     <div class="top-nav-block">
       <ul class="top-nav-list">
@@ -41,6 +101,16 @@
 <script>
   export default {
     name: "TopBar",
+    props: {
+      mode: {
+        type: String,
+        required: true
+      },
+      username: { //后期订制用
+        type: String,
+        required: true
+      }
+    },
     data(){
       return {
         loginInfo: {}
