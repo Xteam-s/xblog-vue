@@ -14,13 +14,25 @@
           <div class="blogers">
             <div v-for="(bloger,index) in blogerList" :key = "index" class="bloger">
               <div class="bloger-card-front">
-                <router-link to="/x/bloger" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
+                <router-link :to="{
+                  name: 'bloger',
+                  path:'/x/bloger/:username',
+                  params: {
+                    username: bloger.name
+                  }
+                }" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
                 <div class="bloger-name">
                   <span>{{bloger.name}}</span>
                 </div>
               </div>
               <div class="bloger-card-back">
-                <router-link to="/x/bloger" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
+                <router-link :to="{
+                  name: 'bloger',
+                  path:'/x/bloger/:username',
+                  params: {
+                    username: bloger.name
+                  }
+                }" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
                 <div class="bloger-intro">
                   <span v-html="bloger.intro"></span>
                 </div>
@@ -47,7 +59,14 @@
           <div class="articles">
             <div v-for="(article,index) in articleList" :key = "index" class="article">
               <div class="article-card-front">
-                <router-link to="/x/article" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
+                <router-link :to="{
+                  name: 'article',
+                  path:'/x/article/:username/:articleId',
+                  params: {
+                    username: article.author,
+                    articleId: article.id
+                  }
+                }" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
                 <div>
                   <span class="article-title">{{article.title}}</span>
                   <p class="article-abstract">{{article.abstract}}</p>
@@ -118,6 +137,7 @@ export default {
           },
           ],
           articleList: [{
+           id: 0,
            title: 'Fibonacci',
            abstract: '斐波那契数列（Fibonacci sequence），又称黄金分割数列、因数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波那契数列以如下被以递推的方法定义：F(1)=1，F(2)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 3，n ∈ N*）在现代物理、准晶体结构、化学等领域，斐波纳契数列都有直接的应用，为此，美国数学会从 1963 年起出版了以《斐波纳契数列季刊》为名的一份数学杂志，用于专门刊载这方面的研究成果。            ',
            imgurl: require('../../assets/img/blogs/fibonacci.jpg'),
@@ -129,6 +149,7 @@ export default {
            txturl: '',
          },
          {
+           id: 1,
            title: 'Binary Serach',
            abstract: '二分查找也称折半查找（Binary Search），它是一种效率较高的查找方法。但是，折半查找要求线性表必须采用顺序存储结构，而且表中元素按关键字有序排列。',
            imgurl: require('../../assets/img/blogs/BS.jpg'),
@@ -140,6 +161,7 @@ export default {
            txturl: '',
          },
          {
+           id: 3,
            title: 'Dijkstra',
            abstract: '迪杰斯特拉算法(Dijkstra)是由荷兰计算机科学家狄克斯特拉于1959 年提出的，因此又叫狄克斯特拉算法。是从一个顶点到其余各顶点的最短路径算法，解决的是有权图中最短路径问题。迪杰斯特拉算法主要特点是从起始点开始，采用贪心算法的策略，每次遍历到始点距离最近且未访问过的顶点的邻接节点，直到扩展到终点为止。',
            imgurl: require('../../assets/img/blogs/Dijkstra.jpg'),
@@ -151,6 +173,7 @@ export default {
            txturl: '',
          },
          {
+           id: 4,
            title: 'JCF',
            abstract: '',
            imgurl: require('../../assets/img/blogs/github_null.jpg'),
@@ -162,6 +185,7 @@ export default {
            txturl: '',
          },
          {
+           id: 5,
            title: 'pyinstaller',
            abstract: '',
            imgurl: require('../../assets/img/blogs/github_null.jpg'),
@@ -173,6 +197,7 @@ export default {
            txturl: '',
          },
          {
+           id: 6,
            title: 'least common multiple',
            abstract: '',
            imgurl: require('../../assets/img/blogs/github_null.jpg'),

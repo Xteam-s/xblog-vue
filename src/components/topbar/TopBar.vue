@@ -50,7 +50,13 @@
           <router-link to="/x/tag">Tags</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/about">About</router-link>
+          <router-link :to="{
+            name: 'about',
+            path: '/x/about/:username',
+            params: {
+              username: this.username
+            }
+          }">About</router-link>
         </li>
       </ul>
     </div>

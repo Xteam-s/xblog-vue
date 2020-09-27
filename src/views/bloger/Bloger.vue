@@ -2,7 +2,7 @@
     <div class="main">
         <tab-bar :mode="mode" :username="bloger.name"></tab-bar>
         <div class="top-wrap">
-            <div class="top-text">Neptu</div>
+            <div class="top-text">{{bloger.name}}</div>
             <div id="downBtn" class="downBtn" @click="downScroll"></div>
             <div class="custom-background-img"></div>
         </div>
@@ -14,7 +14,14 @@
                 <div class="articles">
                     <div v-for="(article,index) in articleList" :key = "index" class="article">
                         <div class="article-card-front">
-                            <router-link to="/x/article" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
+                            <router-link :to="{
+                                name: 'article',
+                                path:'/x/article/:username/:articleId',
+                                params: {
+                                    username: bloger.name,
+                                    articleId: article.id
+                                }
+                            }" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
                             <div>
                                 <span class="article-title">{{article.title}}</span>
                                 <p class="article-abstract">{{article.abstract}}</p>
@@ -60,6 +67,7 @@ export default {
                 zhihu: '',
             },
             articleList: [{
+                id: 0,
                 title: 'Dijkstra',
                 abstract: '迪杰斯特拉算法(Dijkstra)是由荷兰计算机科学家狄克斯特拉于1959 年提出的，因此又叫狄克斯特拉算法。是从一个顶点到其余各顶点的最短路径算法，解决的是有权图中最短路径问题。迪杰斯特拉算法主要特点是从起始点开始，采用贪心算法的策略，每次遍历到始点距离最近且未访问过的顶点的邻接节点，直到扩展到终点为止。',
                 imgurl: require('../../assets/img/blogs/Dijkstra.jpg'),
@@ -80,6 +88,11 @@ export default {
             behavior: "smooth"
             });
         },
+    },
+    activated() {
+        var username = this.$route.params.username;
+        console.log(username); //获取用户名传后端查询信息
+        this.bloger.name = username;
     }
 }
 </script>

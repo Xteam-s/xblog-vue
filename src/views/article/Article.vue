@@ -50,10 +50,12 @@
          }
         }
     },
-    mounted() {
-    
-    },
-    
+    activated() {
+        var username = this.$route.params.username;
+        var id = this.$route.params.articleId;
+        console.log(username); //获取用户名传后端查询信息
+        console.log(id);
+    }
   }
     
   console.log("ok");

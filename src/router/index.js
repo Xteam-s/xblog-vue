@@ -31,7 +31,8 @@ const routes = [
     component: Blog
   },
   {
-    path: '/x/bloger',
+    name: 'bloger',
+    path: '/x/bloger/:username',
     component: Bloger
   },
   {
@@ -39,7 +40,8 @@ const routes = [
     component: Links
   },
   {
-    path: '/x/about',
+    name: 'about',
+    path: '/x/about/:username',
     component: About
   },
   {
@@ -55,7 +57,8 @@ const routes = [
     component: Login
   },
   {
-    path: '/x/article',
+    name: 'article',
+    path: '/x/article/:username/:articleId',
     component: Article
   },
 

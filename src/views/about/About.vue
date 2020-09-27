@@ -43,6 +43,10 @@ export default {
             behavior: "smooth"
             });
         },
+    },
+    activated() {
+        var tmp = this.$route.params.username;
+        console.log(tmp); //获取用户名传后端查询信息
     }
 }
 </script>
