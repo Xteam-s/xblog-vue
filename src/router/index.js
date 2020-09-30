@@ -7,7 +7,7 @@ const About = () => import('../views/about/About')
 //const PostList = () => import('../views/post/PostList')
 const Login = () => import('../views/login/Login')
 const Blog = () => import('../views/blog/Blog')
-const Bloger = () => import('../views/bloger/Bloger')
+const blogger = () => import('../views/blogger/Blogger')
 const Editor = () => import('../views/editor/Editor')
 const Article = () => import('../views/article/Article')
 
@@ -31,9 +31,9 @@ const routes = [
     component: Blog
   },
   {
-    name: 'bloger',
-    path: '/x/bloger/:username',
-    component: Bloger
+    name: 'blogger',
+    path: '/x/blogger/:username',
+    component: blogger
   },
   {
     path: '/x/links',

@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <tab-bar :mode="mode" :username="username"></tab-bar>
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
       <div id="downBtn" class="downBtn" @click="downScroll"></div>
@@ -10,18 +9,18 @@
       <div class="xtitle">
         Links
       </div>
-      <div class="blogers">
-        <div v-for="(bloger,index) in blogerList" :key="index" class="bloger">
-          <div class="bloger-card-front">
-            <a :href="bloger.url" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></a>
-            <div class="bloger-name">
-              <span>{{bloger.name}}</span>
+      <div class="bloggers">
+        <div v-for="(blogger,index) in bloggerList" :key="index" class="blogger">
+          <div class="blogger-card-front">
+            <a :href="blogger.url" class="avatar" :style="{ backgroundImage : 'url(' + blogger.imgurl + ')' }"></a>
+            <div class="blogger-name">
+              <span>{{blogger.name}}</span>
             </div>
           </div>
-          <div class="bloger-card-back">
-            <a :href="bloger.url" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></a>
-            <div class="bloger-intro">
-                <span v-html="bloger.intro"></span>
+          <div class="blogger-card-back">
+            <a :href="blogger.url" class="avatar" :style="{ backgroundImage : 'url(' + blogger.imgurl + ')' }"></a>
+            <div class="blogger-intro">
+                <span v-html="blogger.intro"></span>
             </div>
           </div>
         </div>
@@ -31,18 +30,12 @@
 </template>
 
 <script>
-import TabBar from '@/components/topbar/TopBar';
 
   export default {
     name: "Links",
-    components: {
-      TabBar
-    },
     data() {
       return {
-        mode: "user",
-        username: "default",
-        blogerList: [{ 
+        bloggerList: [{ 
           name: 'baidu',
           imgurl: 'https://www.baidu.com/img/flexible/logo/pc/result.png',
           url: 'https://baidu.com',

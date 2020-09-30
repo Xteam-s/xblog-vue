@@ -1,64 +1,87 @@
 <template>
   <div class="main">
-    <tab-bar :mode="mode" :username="article.author"></tab-bar>
     <div class="index-links" style="margin: 80px">
         <div class="xtitle">
             {{article.title}}
         </div>
         <div class="icon-warp" style="width : 100%; margin : 0 auto; justify-content : center; padding: 0 0 4vh 0">
-            <img class="icon" src="../../assets/img/main_icon/bloger.svg"/>
-            <p id="icon-text">{{article.author}}</p>
+            <img class="icon" src="../../assets/img/main_icon/blogger.svg"/>
+            <p id="icon-text">{{article.author.nickname}}</p>
             <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
             <p id="icon-text">{{article.tag}}</p>
             <img class="icon" src="../../assets/img/main_icon/catagory.svg"/>
-            <p id="icon-text">{{article.theme}}</p>
+            <p id="icon-text">{{article.category}}</p>
             <img class="icon" src="../../assets/img/main_icon/calendar.svg"/>
-            <p id="icon-text">{{article.time}}</p>
+            <p id="icon-text">{{article.createTime}}</p>
             <img class="icon" src="../../assets/img/main_icon/visits.svg"/>
             <p id="icon-text">{{article.views}}</p>
         </div>
         <v-editor :content = "article.content"></v-editor>
+        <div class="xtiltle" >
+            Comments
+        </div>
     </div>
   </div>
 </template>
 
 <script>
-  import TabBar from '@/components/topbar/TopBar';
   import vEditor from '@/components/editormd/EditorMD';
 
   export default {
     name: "Article",
     components: {
-      TabBar,
       vEditor
     },
     data() {
         return {
-          mode: "bloger",
           article: {
-           title: 'Fibonacci',
-           //abstract: '斐波那契数列（Fibonacci sequence），又称黄金分割数列、因数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波那契数列以如下被以递推的方法定义：F(1)=1，F(2)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 3，n ∈ N*）在现代物理、准晶体结构、化学等领域，斐波纳契数列都有直接的应用，为此，美国数学会从 1963 年起出版了以《斐波纳契数列季刊》为名的一份数学杂志，用于专门刊载这方面的研究成果。            ',
-           content: "##从服务器获取文章内容\n```java\n public static void main(String args[]){\n    System.out.println();\n} \n```\n```html\n<div><p>好，很有精神</p></div>\n```",
-           imgurl: require('../../assets/img/blogs/fibonacci.jpg'),
-           theme: '数学',
-           author: 'Terminator',
-           time: '2020-7-22',
-           tag: '数列',
-           views: '2',
-           txturl: '',
+            author: {
+              avatar: "string",
+              description: "string",
+              nickname: "string"
+            },
+            category: "string",
+            content: "string",
+            cover: "string",
+            createTime: "2020-09-30T15:20:07.435Z",
+            id: 0,
+            likes: 0,
+            shared: true,
+            summary: "string",
+            tags: [
+              "string"
+            ],
+            title: "string",
+            updateTime: "2020-09-30T15:03:29.285Z",
+            views: 0
            //文章字数，阅读时长
          }
         }
+    },
+    mounted() {
+      this.$store.commit('login',{ //更改状态
+        _mode: "blogger",
+        _username: this.username
+      });
     },
     activated() {
         var username = this.$route.params.username;
         var id = this.$route.params.articleId;
         console.log(username); //获取用户名传后端查询信息
         console.log(id);
+        this.axios.get( //获取该博客
+          'post',
+          {params: {
+            'id': id
+          }
+        }).then(success => {
+          this.article = success.data.data;
+          console.log(success.data);
+        },failure => {
+          console.log(failure.data);
+        })
     }
   }
-    
-  console.log("ok");
 </script>
 
 <style scope>

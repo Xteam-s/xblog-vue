@@ -1,8 +1,7 @@
 <template>
     <div class="main">
-        <tab-bar :mode="mode" :username="bloger.name"></tab-bar>
         <div class="top-wrap">
-            <div class="top-text">{{bloger.name}}</div>
+            <div class="top-text">{{blogger.name}}</div>
             <div id="downBtn" class="downBtn" @click="downScroll"></div>
             <div class="custom-background-img"></div>
         </div>
@@ -18,7 +17,7 @@
                                 name: 'article',
                                 path:'/x/article/:username/:articleId',
                                 params: {
-                                    username: bloger.name,
+                                    username: blogger.name,
                                     articleId: article.id
                                 }
                             }" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
@@ -26,7 +25,7 @@
                                 <span class="article-title">{{article.title}}</span>
                                 <p class="article-abstract">{{article.abstract}}</p>
                                 <div class="icon-warp">
-                                    <img class="icon" src="../../assets/img/main_icon/bloger.svg"/>
+                                    <img class="icon" src="../../assets/img/main_icon/blogger.svg"/>
                                     <p id="icon-text">{{article.author}}</p>
                                     <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
                                     <p id="icon-text">{{article.tag}}</p>
@@ -46,19 +45,15 @@
 </template>
 
 <script>
-import TabBar from '@/components/topbar/TopBar';
+
 export default {
-    name: "bloger",
-    components: {
-        TabBar
-    },
+    name: "blogger",
     data() {
         return {
-            mode: "bloger",
-            bloger: {
+            blogger: {
                 name: 'Neptu',
-                imgurl: require('../../assets/img/bloger/avatar.jpg'),
-                url: '/x/bloger',
+                imgurl: require('../../assets/img/blogger/avatar.jpg'),
+                url: '/x/blogger',
                 intro: '简介1111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
                 github: 'https://baidu.com',
                 email: 'xxxxx@xx',
@@ -92,7 +87,7 @@ export default {
     activated() {
         var username = this.$route.params.username;
         console.log(username); //获取用户名传后端查询信息
-        this.bloger.name = username;
+        this.blogger.name = username;
     }
 }
 </script>

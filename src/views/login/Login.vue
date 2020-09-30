@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <tab-bar :mode="mode" :username="username"></tab-bar>
     <div class="top-wrap">
       <div class="custom-background-img"></div>
     </div>
@@ -23,17 +22,11 @@
 </template>
 
 <script>
-  import TabBar from '@/components/topbar/TopBar';
 
   export default {
     name: "Login",
-    components: {
-      TabBar
-    },
     data(){
       return {
-        mode: "user",
-        name: "default",
 
         username: '',
         password: '',
@@ -77,6 +70,14 @@
           }
         ).then(success => {
           console.log('dlcg')
+
+          this.$store.commit('login',{ //更改状态
+            _mode: "kernel",
+            _username: this.username
+          });
+
+          this.$router.push('blogger/'+this.username);
+
           this.$emit('login', success.data.data);
           // eslint-disable-next-line no-unused-vars
         }, failure => {
@@ -96,6 +97,7 @@
           console.log(response.data)
         })
       },
+      
       savePost(){
         this.axios.post(
             'post',

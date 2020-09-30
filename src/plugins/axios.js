@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "qs";
 
 // Full config:  https://github.com/axios/axios#request-config
-axios.defaults.baseURL = 'http://localhost/api'
+axios.defaults.baseURL = 'http://neptu.cn/api'
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.withCredentials = true;

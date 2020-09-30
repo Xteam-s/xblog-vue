@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <tab-bar :mode="mode" :username="username"></tab-bar>
+    <tab-bar></tab-bar>
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
       <div id="downBtn" class="downBtn" @click="downScroll"></div>
@@ -9,41 +9,41 @@
     <div class="container">
         <div id="index-links" class="index-links">
           <div class="xtitle">
-            BLOGERS
+            bloggers
           </div>
-          <div class="blogers">
-            <div v-for="(bloger,index) in blogerList" :key = "index" class="bloger">
-              <div class="bloger-card-front">
+          <div class="bloggers">
+            <div v-for="(blogger,index) in bloggerList" :key = "index" class="blogger">
+              <div class="blogger-card-front">
                 <router-link :to="{
-                  name: 'bloger',
-                  path:'/x/bloger/:username',
+                  name: 'blogger',
+                  path: '/x/blogger/:username',
                   params: {
-                    username: bloger.name
+                    username: blogger.blogger.nickname
                   }
-                }" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
-                <div class="bloger-name">
-                  <span>{{bloger.name}}</span>
+                }" class="avatar" :style="{ backgroundImage : 'url(http://' + blogger.blogger.avatar + ')' }"></router-link>
+                <div class="blogger-name">
+                  <span>{{blogger.blogger.nickname}}</span>
                 </div>
               </div>
-              <div class="bloger-card-back">
+              <div class="blogger-card-back">
                 <router-link :to="{
-                  name: 'bloger',
-                  path:'/x/bloger/:username',
+                  name: 'blogger',
+                  path:'/x/blogger/:username',
                   params: {
-                    username: bloger.name
+                    username: blogger.blogger.nickname
                   }
-                }" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></router-link>
-                <div class="bloger-intro">
-                  <span v-html="bloger.intro"></span>
+                }" class="avatar" :style="{ backgroundImage : 'url(http://' + blogger.blogger.avatar + ')' }"></router-link>
+                <div class="blogger-intro">
+                  <span v-html="blogger.blogger.description"></span>
                 </div>
                 <div class="link-wrap">
-                  <img :name="bloger.name" v-if="bloger.github != ''" class="bloger-link" src="../../assets/img/main_icon/link/github.svg"/>
-                  <img :name="bloger.name" v-if="bloger.email != ''" class="bloger-link" src="../../assets/img/main_icon/link/email.svg"/>
-                  <img :name="bloger.name" v-if="bloger.qq != ''" class="bloger-link" src="../../assets/img/main_icon/link/qq.svg"/>
-                  <img :name="bloger.name" v-if="bloger.wechat != ''" class="bloger-link" src="../../assets/img/main_icon/link/wechat.svg"/>
-                  <img :name="bloger.name" v-if="bloger.zhihu != ''" class="bloger-link" src="../../assets/img/main_icon/link/zhihu.svg"/>
+                  <img :name="blogger.blogger.nickname" v-if="blogger.blogger.github != 'string'" class="blogger-link" src="../../assets/img/main_icon/link/github.svg"/>
+                  <img :name="blogger.blogger.nickname" v-if="blogger.blogger.email != 'string'" class="blogger-link" src="../../assets/img/main_icon/link/email.svg"/>
+                  <img :name="blogger.blogger.nickname" v-if="blogger.blogger.qq != 'string'" class="blogger-link" src="../../assets/img/main_icon/link/qq.svg"/>
+                  <img :name="blogger.blogger.nickname" v-if="blogger.blogger.wechat != 'string'" class="blogger-link" src="../../assets/img/main_icon/link/wechat.svg"/>
+                  <img :name="blogger.blogger.nickname" v-if="blogger.blogger.zhihu != 'string'" class="blogger-link" src="../../assets/img/main_icon/link/zhihu.svg"/>
                 </div>
-                <div :name="bloger.name + '_info'" class="info">
+                <div :name="blogger.blogger.nickname + '_info'" class="info">
                   
                 </div>
               </div>
@@ -63,22 +63,22 @@
                   name: 'article',
                   path:'/x/article/:username/:articleId',
                   params: {
-                    username: article.author,
+                    username: article.author.nickname,
                     articleId: article.id
                   }
-                }" class="article-img" :style="{ backgroundImage : 'url(' + article.imgurl + ')' }"></router-link>
+                }" class="article-img" :style="{ backgroundImage : 'url(http://' + article.cover + ')' }"></router-link>
                 <div>
                   <span class="article-title">{{article.title}}</span>
-                  <p class="article-abstract">{{article.abstract}}</p>
+                  <p class="article-abstract">{{article.summary}}</p>
                   <div class="icon-warp">
-                    <img class="icon" src="../../assets/img/main_icon/bloger.svg"/>
-                      <p id="icon-text">{{article.author}}</p>
+                    <img class="icon" src="../../assets/img/main_icon/blogger.svg"/>
+                      <p id="icon-text">{{article.author.nickname}}</p>
                     <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
-                      <p id="icon-text">{{article.tag}}</p>
+                      <p id="icon-text">{{article.tags}}</p>
                     <img class="icon" src="../../assets/img/main_icon/catagory.svg"/>
-                      <p id="icon-text">{{article.theme}}</p>
+                      <p id="icon-text">{{article.category}}</p>
                     <img class="icon" src="../../assets/img/main_icon/calendar.svg"/>
-                      <p id="icon-text">{{article.time}}</p>
+                      <p id="icon-text">{{article.createTime}}</p>
                     <img class="icon" src="../../assets/img/main_icon/visits.svg"/>
                       <p id="icon-text">{{article.views}}</p>
                   </div>
@@ -100,116 +100,46 @@ export default {
     },
     data() {
       return {
-          mode: "user",
-          username: "default",
-          blogerList: [{ 
-            name: 'Neptu',
-            imgurl: require('../../assets/img/bloger/avatar.jpg'),
-            url: '/x/bloger',
-            intro: '简介1111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
-            github: 'https://baidu.com',
-            email: 'xxxxx@xx',
-            qq: '4894564646',
-            wechat: '12345',
-            zhihu: '',
-          },
-          { 
-            name: 'Terminator',
-            imgurl: require('../../assets/img/bloger/avatar2.jpg'),
-            url: '/x/bloger',
-            intro: '简介',
-            github: '',
-            email: 'yyyyy@yy',
-            qq: '123456789',
-            wechat: '',
-            zhihu: 'https://baidu.com',
-          },
-          { 
-            name: 'Xavier',
-            imgurl: require('../../assets/img/bloger/avatar4.jpg'),
-            url: '/x/bloger',
-            intro: '简介',
-            github: '',
-            email: '',
-            qq: '',
-            wechat: 'abcde',
-            zhihu: '',
-          },
+          bloggerList: [
+            {
+              blogger: {
+                avatar: "string",
+                description: "string",
+                nickname: "string",
+                github: "string",
+                email: "string",
+                qq: "string",
+                wechat: "string",
+                zhihu: "string"
+              },
+              customUrl: "string",
+              id: 0,
+              name: "string"
+            }
           ],
-          articleList: [{
-           id: 0,
-           title: 'Fibonacci',
-           abstract: '斐波那契数列（Fibonacci sequence），又称黄金分割数列、因数学家莱昂纳多·斐波那契（Leonardoda Fibonacci）以兔子繁殖为例子而引入，故又称为“兔子数列”，指的是这样一个数列：0、1、1、2、3、5、8、13、21、34、……在数学上，斐波那契数列以如下被以递推的方法定义：F(1)=1，F(2)=1, F(n)=F(n - 1)+F(n - 2)（n ≥ 3，n ∈ N*）在现代物理、准晶体结构、化学等领域，斐波纳契数列都有直接的应用，为此，美国数学会从 1963 年起出版了以《斐波纳契数列季刊》为名的一份数学杂志，用于专门刊载这方面的研究成果。            ',
-           imgurl: require('../../assets/img/blogs/fibonacci.jpg'),
-           theme: '数学',
-           author: 'Terminator',
-           time: '2020-7-22',
-           tag: '数列',
-           views: '2',
-           txturl: '',
-         },
-         {
-           id: 1,
-           title: 'Binary Serach',
-           abstract: '二分查找也称折半查找（Binary Search），它是一种效率较高的查找方法。但是，折半查找要求线性表必须采用顺序存储结构，而且表中元素按关键字有序排列。',
-           imgurl: require('../../assets/img/blogs/BS.jpg'),
-           theme: '计算机',
-           author: 'Xavier',
-           time: '2020-7-22',
-           tag: '算法',
-           views: '3',
-           txturl: '',
-         },
-         {
-           id: 3,
-           title: 'Dijkstra',
-           abstract: '迪杰斯特拉算法(Dijkstra)是由荷兰计算机科学家狄克斯特拉于1959 年提出的，因此又叫狄克斯特拉算法。是从一个顶点到其余各顶点的最短路径算法，解决的是有权图中最短路径问题。迪杰斯特拉算法主要特点是从起始点开始，采用贪心算法的策略，每次遍历到始点距离最近且未访问过的顶点的邻接节点，直到扩展到终点为止。',
-           imgurl: require('../../assets/img/blogs/Dijkstra.jpg'),
-           theme: '计算机',
-           author: 'Neptu',
-           time: '2020-7-22',
-           tag: '算法',
-           views: '5',
-           txturl: '',
-         },
-         {
-           id: 4,
-           title: 'JCF',
-           abstract: '',
-           imgurl: require('../../assets/img/blogs/github_null.jpg'),
-           theme: '',
-           author: '',
-           time: '',
-           tag: '',
-           views: '',
-           txturl: '',
-         },
-         {
-           id: 5,
-           title: 'pyinstaller',
-           abstract: '',
-           imgurl: require('../../assets/img/blogs/github_null.jpg'),
-           theme: '',
-           author: '',
-           time: '',
-           tag: '',
-           views: '',
-           txturl: '',
-         },
-         {
-           id: 6,
-           title: 'least common multiple',
-           abstract: '',
-           imgurl: require('../../assets/img/blogs/github_null.jpg'),
-           theme: '',
-           author: '',
-           time: '',
-           tag: '',
-           views: '',
-           txturl: '',
-         },
-      ]
-      }
+          articleList: [
+            {
+              author: {
+                avatar: "string",
+                description: "string",
+                nickname: "string"
+              },
+              category: "string",
+              cover: "string",
+              createTime: "2020-09-30T15:03:29.285Z",
+              id: 0,
+              likes: 0,
+              shared: true,
+              summary: "string",
+              tags: [
+                "string"
+              ],
+              title: "string",
+              updateTime: "2020-09-30T15:03:29.285Z",
+              views: 0
+            }
+          ]
+    }
    },
    methods:{
         downScroll: function () {
@@ -220,7 +150,7 @@ export default {
         },
 
         // Begin scroll listeners -----
-        // blogers and articles animation
+        // bloggers and articles animation
         
         // fixed background image
         fixedBackgroundImage: function () {
@@ -239,9 +169,27 @@ export default {
         
         // End scroll listeners -----
 
-   }
-  }
+   },
+   mounted() {
+    this.axios.get( //获取所有博主
+       'blog/all'
+    ).then(success => {
+      this.bloggerList = success.data.data;
+      console.log(success.data);
+    }, failure => {
+      console.log(failure.data);
+    })
 
+    this.axios.get( //获取最近10条博客
+      'post/recent'
+    ).then(success => {
+      this.articleList = success.data.data;
+      console.log(success.data);
+    },failure => {
+      console.log(failure.data);
+    })
+   }
+}
 </script>
 
 <style scoped>

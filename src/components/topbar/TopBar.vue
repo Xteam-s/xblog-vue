@@ -27,7 +27,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="mode == 'bloger'" class="top-nav-block"> <!--user mode for bloger-->
+    <div v-if="mode == 'blogger'" class="top-nav-block"> <!--user mode for blogger-->
       <ul class="top-nav-list">
         <li>
           <router-link to="/x/home">
@@ -38,7 +38,7 @@
           <router-link to="/x/blog">Home</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/bloger">RecentBlog</router-link>
+          <router-link to="/x/blogger">RecentBlog</router-link>
         </li>
         <li class="top-bar-link">
           <router-link to="/x/archive">Archives</router-link>
@@ -93,11 +93,11 @@
     </div>
     <div class="top-nav-block">
       <ul class="top-nav-list">
-        <li class="top-bar-link" v-if="!loginInfo.isLogin">
+        <li class="top-bar-link" v-if="username == 'default'">
           <router-link to="/x/login">Login</router-link>
         </li>
-        <li v-else>
-          nickname: {{loginInfo.nickname}}
+        <li class="top-bar-link" v-else>
+          {{username}}
         </li>
       </ul>
     </div>
@@ -107,25 +107,24 @@
 <script>
   export default {
     name: "TopBar",
-    props: {
-      mode: {
-        type: String,
-        required: true
-      },
-      username: { //后期订制用
-        type: String,
-        required: true
-      }
-    },
-    data(){
+    data(){ //调用子组件函数来赋值
       return {
         loginInfo: {}
       }
     },
-    mounted(){
+    computed: {
+      mode: function() {
+        console.log(this.$store.state.mode);
+        return this.$store.state.mode;
+      },
+      username: function() {
+        return this.$store.state.username;
+      }
+    },
+    mounted() {
       this.$on('login',loginInfo => {
         this.loginInfo = loginInfo;
-      })
+      });
     }
     //动画有问题
     // created(){

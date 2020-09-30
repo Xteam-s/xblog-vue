@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <tab-bar :mode="mode" :username="bloger.name"></tab-bar>
     <div class="top-wrap">
       <div class="custom-background-img"></div>
     </div>
@@ -13,20 +12,15 @@
 </template>
 
 <script>
-import TabBar from '@/components/topbar/TopBar';
 
 export default {
-    name: "bloger",
-    components: {
-        TabBar
-    },
+    name: "blogger",
     data() {
         return {
-            mode: "bloger",
-            bloger: {
+            blogger: {
                 name: 'Neptu',
-                imgurl: require('../../assets/img/bloger/avatar.jpg'),
-                url: '/x/bloger',
+                imgurl: require('../../assets/img/blogger/avatar.jpg'),
+                url: '/x/blogger',
                 intro: '简介1111111111111111111111111111111111111111111111111111111111111111111111111111111111111',
                 github: 'https://baidu.com',
                 email: 'xxxxx@xx',
