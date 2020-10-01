@@ -6,12 +6,29 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     mode: "user",
-    username: "default"
+    blogger: {
+      avatar: "default",
+      description: "default",
+      isLogin: false,
+      nickname: "default"
+    }
   },
   mutations: {
     login(state, data) {
-      state.mode = data._mode;
-      state.username = data._username;
+      state.blogger = data;
+    },
+
+    logout(state) {
+      state.blogger = {
+        avatar: "default",
+        description: "default",
+        isLogin: false,
+        nickname: "default"
+      }
+    },
+
+    setMode(state, data) {
+      state.mode = data;
     }
   }
 })

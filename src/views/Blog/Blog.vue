@@ -188,6 +188,9 @@ export default {
     },failure => {
       console.log(failure.data);
     })
+   },
+   activated() {
+     this.$store.commit('setMode', "user");
    }
 }
 </script>

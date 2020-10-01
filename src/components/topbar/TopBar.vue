@@ -1,6 +1,6 @@
 <template>
   <header class="top-nav">
-    <div v-if="mode == 'user'" class="top-nav-block"> <!--user mode for home-->
+    <div v-if="!blogger.isLogin && mode == 'user'" class="top-nav-block"> <!--user mode for home-->
       <ul class="top-nav-list">
         <li>
           <router-link to="/x/home">
@@ -19,15 +19,15 @@
         <li class="top-bar-link">
           <router-link to="/x/tag">Tags</router-link>
         </li>
-        <li class="top-bar-link">
-          <router-link to="/x/editor">Editor</router-link> <!--暂留用作调试-->
-        </li>
+        <!-- <li class="top-bar-link">
+          <router-link to="/x/editor">Editor</router-link>
+        </li> -->
         <li class="top-bar-link">
           <router-link to="/x/links">Links</router-link>
         </li>
       </ul>
     </div>
-    <div v-if="mode == 'blogger'" class="top-nav-block"> <!--user mode for blogger-->
+    <div v-if="!blogger.isLogin && mode == 'blogger'" class="top-nav-block"> <!--user mode for blogger-->
       <ul class="top-nav-list">
         <li>
           <router-link to="/x/home">
@@ -52,16 +52,16 @@
         <li class="top-bar-link">
           <router-link :to="{
             name: 'about',
-            path: '/x/about/:username',
+            path: '/x/about/:nickname',
             params: {
-              username: this.username
+              nickname: blogger.nickname
             }
           }">About</router-link>
         </li>
       </ul>
     </div>
 
-    <div v-if="mode == 'kernel'" class="top-nav-block"> <!--kernel mode (after login)-->
+    <div v-if="blogger.isLogin" class="top-nav-block"> <!--kernel mode (after login)-->
       <ul class="top-nav-list">
         <li>
           <router-link to="/x/home">
@@ -93,11 +93,15 @@
     </div>
     <div class="top-nav-block">
       <ul class="top-nav-list">
-        <li class="top-bar-link" v-if="username == 'default'">
+        <li class="top-bar-link" v-if="!blogger.isLogin">
           <router-link to="/x/login">Login</router-link>
         </li>
-        <li class="top-bar-link" v-else>
-          {{username}}
+        <li class="top-bar-link" v-if="blogger.isLogin">
+          <div class="avatar" :style="{ backgroundImage : 'url(http://' + blogger.avatar + ')' }"></div>
+          {{blogger.nickname}}
+        </li>
+        <li class="top-bar-link" v-if="blogger.isLogin" @click="logout">
+          Log out
         </li>
       </ul>
     </div>
@@ -109,7 +113,6 @@
     name: "TopBar",
     data(){ //调用子组件函数来赋值
       return {
-        loginInfo: {}
       }
     },
     computed: {
@@ -117,15 +120,18 @@
         console.log(this.$store.state.mode);
         return this.$store.state.mode;
       },
-      username: function() {
-        return this.$store.state.username;
+      blogger: function() {
+        console.log(this.$store.state.blogger);
+        return this.$store.state.blogger;
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.commit('logout');
       }
     },
     mounted() {
-      this.$on('login',loginInfo => {
-        this.loginInfo = loginInfo;
-      });
-    }
+      
     //动画有问题
     // created(){
     //   this.axios(
@@ -135,6 +141,7 @@
     //     this.loginInfo = success.data.data;
     //   })
     // }
+    }
   }
 </script>
 
@@ -215,5 +222,19 @@
 
   .link-active{
     color: deepskyblue;
+  }
+
+
+  .top-bar-link .avatar {
+    display: inline-block;
+    width: 2vw;
+    height: 2vw;
+    vertical-align: middle;
+    background-color: #fff;
+    background: no-repeat center;
+    background-size: 100%;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: #eee 0 0 5px 2px;
   }
 </style>

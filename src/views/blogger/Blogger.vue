@@ -85,6 +85,8 @@ export default {
         },
     },
     activated() {
+        this.$store.commit('setMode',"blogger");
+
         var username = this.$route.params.username;
         console.log(username); //获取用户名传后端查询信息
         this.blogger.name = username;

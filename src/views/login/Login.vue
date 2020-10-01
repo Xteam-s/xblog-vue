@@ -60,6 +60,11 @@
         }
       }
     },
+    computed: {
+      blogger: function() {
+        return this.$store.state.blogger;
+      }
+    },
     methods: {
       submit(){
         this.axios.post(
@@ -71,14 +76,12 @@
         ).then(success => {
           console.log('dlcg')
 
-          this.$store.commit('login',{ //更改状态
-            _mode: "kernel",
-            _username: this.username
-          });
+          this.$store.commit('login',success.data.data);
 
-          this.$router.push('blogger/'+this.username);
+          this.enterKeyupDestroyed(); //销毁事件
+          this.$router.push('blogger/'+this.blogger.nickname);
 
-          this.$emit('login', success.data.data);
+          //this.$emit('login', success.data.data);
           // eslint-disable-next-line no-unused-vars
         }, failure => {
           console.log('dlsb')
@@ -118,7 +121,44 @@
         }, failure => {
           console.log(failure.data);
         })
+      },
+
+
+      enterKey(event) {
+        const componentName = this.$options.name;
+        if (componentName == "Login") {
+            const code = event.keyCode
+                ? event.keyCode
+                : event.which
+                    ? event.which
+                    : event.charCode;
+            if (code == 13) {
+                this.submit();
+            }
+        }
+      },
+      enterKeyupDestroyed() {
+        console.log("destroyed")
+          document.removeEventListener("keyup", this.enterKey);
+      },
+      enterKeyup() {
+          document.addEventListener("keyup", this.enterKey);
+      },
+    },
+    mounted() {
+      
+    },
+    activated() {
+      if(this.blogger.isLogin) {
+        this.$router.push('blogger/'+this.blogger.nickname);
       }
+      else {
+        this.enterKeyup();
+      }
+      this.$store.commit('setMode',"user");
+    },
+    destroyed() {
+      this.enterKeyupDestroyed();
     }
   }
 </script>
