@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <tab-bar></tab-bar>
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
       <div id="downBtn" class="downBtn" @click="downScroll"></div>
@@ -16,9 +15,9 @@
               <div class="blogger-card-front">
                 <router-link :to="{
                   name: 'blogger',
-                  path: '/x/blogger/:username',
+                  path: '/x/blogger/:nickname',
                   params: {
-                    username: blogger.blogger.nickname
+                    nickname: blogger.blogger.nickname
                   }
                 }" class="avatar" :style="{ backgroundImage : 'url(http://' + blogger.blogger.avatar + ')' }"></router-link>
                 <div class="blogger-name">
@@ -61,9 +60,9 @@
               <div class="article-card-front">
                 <router-link :to="{
                   name: 'article',
-                  path:'/x/article/:username/:articleId',
+                  path:'/x/article/:nickname/:articleId',
                   params: {
-                    username: article.author.nickname,
+                    nickname: article.author.nickname,
                     articleId: article.id
                   }
                 }" class="article-img" :style="{ backgroundImage : 'url(http://' + article.cover + ')' }"></router-link>
@@ -76,7 +75,7 @@
                     <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
                       <p id="icon-text">{{article.tags}}</p>
                     <img class="icon" src="../../assets/img/main_icon/catagory.svg"/>
-                      <p id="icon-text">{{article.category}}</p>
+                      <p id="icon-text">{{article.category.name}}</p>
                     <img class="icon" src="../../assets/img/main_icon/calendar.svg"/>
                       <p id="icon-text">{{article.createTime}}</p>
                     <img class="icon" src="../../assets/img/main_icon/visits.svg"/>
@@ -91,13 +90,9 @@
 </template>
 
 <script>
-import TabBar from '@/components/topbar/TopBar';
 
 export default {
     name: "BlogList",
-    components: {
-      TabBar
-    },
     data() {
       return {
           bloggerList: [
@@ -189,6 +184,7 @@ export default {
       console.log(failure.data);
     })
    },
+
    activated() {
      this.$store.commit('setMode', "user");
    }

@@ -10,12 +10,13 @@ const store = new Vuex.Store({
       avatar: "default",
       description: "default",
       isLogin: false,
-      nickname: "default"
-    }
+      nickname: "default",
+      customUrl: "default"
+    },
   },
   mutations: {
-    login(state, data) {
-      state.blogger = data;
+    login(state, payload) {
+      state.blogger = payload;
     },
 
     logout(state) {
@@ -27,9 +28,12 @@ const store = new Vuex.Store({
       }
     },
 
-    setMode(state, data) {
-      state.mode = data;
-    }
+    setMode(state, payload) {
+      state.mode = payload;
+    },
+  },
+  actions: {
+    
   }
 })
 

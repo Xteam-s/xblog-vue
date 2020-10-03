@@ -51,6 +51,8 @@
         editor: null
       }
     },
+    computed: {
+    },
     methods: {
       initEditor(){
         // eslint-disable-next-line
@@ -63,9 +65,8 @@
           }
         });
       },
-      test(){
-        console.log(this.editor.getMarkdown())
-        console.log(this.editor.getHTML())
+      getMarkdown: function() {
+        return this.editor.getMarkdown();
       }
     },
     mounted() {

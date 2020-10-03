@@ -19,9 +19,9 @@
         <li class="top-bar-link">
           <router-link to="/x/tag">Tags</router-link>
         </li>
-        <!-- <li class="top-bar-link">
+        <li class="top-bar-link">
           <router-link to="/x/editor">Editor</router-link>
-        </li> -->
+        </li>
         <li class="top-bar-link">
           <router-link to="/x/links">Links</router-link>
         </li>

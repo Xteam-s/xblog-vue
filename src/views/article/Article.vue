@@ -8,15 +8,15 @@
             <img class="icon" src="../../assets/img/main_icon/blogger.svg"/>
             <p id="icon-text">{{article.author.nickname}}</p>
             <img class="icon" src="../../assets/img/main_icon/tag.svg"/>
-            <p id="icon-text">{{article.tag}}</p>
+            <p id="icon-text">{{article.tags}}</p>
             <img class="icon" src="../../assets/img/main_icon/catagory.svg"/>
-            <p id="icon-text">{{article.category}}</p>
+            <p id="icon-text">{{article.category.name}}</p>
             <img class="icon" src="../../assets/img/main_icon/calendar.svg"/>
             <p id="icon-text">{{article.createTime}}</p>
             <img class="icon" src="../../assets/img/main_icon/visits.svg"/>
             <p id="icon-text">{{article.views}}</p>
         </div>
-        <v-editor :content = "article.content"></v-editor>
+        <v-editor :content="article.content"></v-editor>
         <div class="xtiltle" >
             Comments
         </div>
@@ -34,6 +34,8 @@
     },
     data() {
         return {
+          id: 0,
+          mode: "article",
           article: {
             author: {
               avatar: "string",
@@ -41,7 +43,7 @@
               nickname: "string"
             },
             category: "string",
-            content: "string",
+            content: "#出错了，请刷新",
             cover: "string",
             createTime: "2020-09-30T15:20:07.435Z",
             id: 0,
@@ -58,21 +60,57 @@
          }
         }
     },
+    watch: {
+      article(newVal, oldVal) {
+        if(oldVal != newVal){
+          this.article = newVal;
+          console.log(newVal.content);
+        }
+        
+      }
+    },
+    methods: {
+      clear() {
+        console.log("cleared");
+        this.article = {
+            author: {
+              avatar: "string",
+              description: "string",
+              nickname: "string"
+            },
+            category: "string",
+            content: "#出错了，请刷新",
+            cover: "string",
+            createTime: "2020-09-30T15:20:07.435Z",
+            id: 0,
+            likes: 0,
+            shared: true,
+            summary: "string",
+            tags: [
+              "string"
+            ],
+            title: "string",
+            updateTime: "2020-09-30T15:03:29.285Z",
+            views: 0
+           //文章字数，阅读时长
+         }
+      }
+    },
     mounted() {
-      this.$store.commit('login',{ //更改状态
-        _mode: "blogger",
-        _username: this.username
-      });
+      
     },
     activated() {
-        var username = this.$route.params.username;
-        var id = this.$route.params.articleId;
-        console.log(username); //获取用户名传后端查询信息
-        console.log(id);
+        this.clear();
+        this.$store.commit('setMode', "blogger"); //更改状态
+        
+        this.id = this.$route.params.articleId;
+        var nickname = this.$route.params.nickname; //获取用户名传后端查询信息
+
         this.axios.get( //获取该博客
           'post',
-          {params: {
-            'id': id
+        {
+          params: {
+            id: this.id
           }
         }).then(success => {
           this.article = success.data.data;
@@ -80,7 +118,7 @@
         },failure => {
           console.log(failure.data);
         })
-    }
+    },
   }
 </script>
 

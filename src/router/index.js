@@ -58,7 +58,7 @@ const routes = [
   },
   {
     name: 'article',
-    path: '/x/article/:username/:articleId',
+    path: '/x/article/:nickname/:articleId',
     component: Article
   },
 
