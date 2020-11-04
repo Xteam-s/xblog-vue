@@ -16,15 +16,11 @@
     name: 'App',
     components: {
       TabBar
-    }
+    },
   }
 </script>
 
 <style>
   @import "assets/css/reset.css";
-
-  main{
-    padding-top: 50px;
-  }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <header class="top-nav">
-    <div class="top-nav-block">
+    <div v-if="!blogger.isLogin && mode == 'user'" class="top-nav-block"> <!--user mode for home-->
       <ul class="top-nav-list">
         <li>
           <router-link to="/x/home">
@@ -8,10 +8,16 @@
           </router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/bloggers">Blogger</router-link>
+          <router-link to="/x/blog">Blogger</router-link>
         </li>
         <li class="top-bar-link">
-          <router-link to="/x/recent">RecentBlog</router-link>
+          <router-link to="/x/archive">Archives</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/category">Categories</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/tag">Tags</router-link>
         </li>
         <li class="top-bar-link">
           <router-link to="/x/editor">Editor</router-link>
@@ -26,15 +32,82 @@
           <router-link to="/x/article">Article</router-link>
         </li>
       </ul>
+    </div>
+    <div v-if="!blogger.isLogin && mode == 'blogger'" class="top-nav-block"> <!--user mode for blogger-->
+      <ul class="top-nav-list">
+        <li>
+          <router-link to="/x/home">
+            <div class="top-nav-logo"></div>
+          </router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/blog">Home</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/blogger">RecentBlog</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/archive">Archives</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/category">Categories</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/tag">Tags</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link :to="{
+            name: 'about',
+            path: '/x/about/:nickname',
+            params: {
+              nickname: blogger.nickname
+            }
+          }">About</router-link>
+        </li>
+      </ul>
+    </div>
 
+    <div v-if="blogger.isLogin" class="top-nav-block"> <!--kernel mode (after login)-->
+      <ul class="top-nav-list">
+        <li>
+          <router-link to="/x/home">
+            <div class="top-nav-logo"></div>
+          </router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/home">Home</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/blog">Blogger</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/archive">Archives</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/category">Categories</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/tag">Tags</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/editor">Editor</router-link>
+        </li>
+        <li class="top-bar-link">
+          <router-link to="/x/links">Links</router-link>
+        </li>
+      </ul>
     </div>
     <div class="top-nav-block">
       <ul class="top-nav-list">
-        <li class="top-bar-link" v-if="!loginInfo.isLogin">
+        <li class="top-bar-link" v-if="!blogger.isLogin">
           <router-link to="/x/login">Login</router-link>
         </li>
-        <li v-else>
-          nickname: {{loginInfo.nickname}}
+        <li class="top-bar-link" v-if="blogger.isLogin">
+          <div class="avatar" :style="{ backgroundImage : 'url(http://' + blogger.avatar + ')' }"></div>
+          {{blogger.nickname}}
+        </li>
+        <li class="top-bar-link" v-if="blogger.isLogin" @click="logout">
+          Log out
         </li>
       </ul>
     </div>
@@ -44,16 +117,27 @@
 <script>
   export default {
     name: "TopBar",
-    data(){
+    data(){ //调用子组件函数来赋值
       return {
-        loginInfo: {}
       }
     },
-    mounted(){
-      this.$on('login',loginInfo => {
-        this.loginInfo = loginInfo;
-      })
-    }
+    computed: {
+      mode: function() {
+        console.log(this.$store.state.mode);
+        return this.$store.state.mode;
+      },
+      blogger: function() {
+        console.log(this.$store.state.blogger);
+        return this.$store.state.blogger;
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.commit('logout');
+      }
+    },
+    mounted() {
+      
     //动画有问题
     // created(){
     //   this.axios(
@@ -63,6 +147,7 @@
     //     this.loginInfo = success.data.data;
     //   })
     // }
+    }
   }
 </script>
 
@@ -143,5 +228,19 @@
 
   .link-active{
     color: deepskyblue;
+  }
+
+
+  .top-bar-link .avatar {
+    display: inline-block;
+    width: 2vw;
+    height: 2vw;
+    vertical-align: middle;
+    background-color: #fff;
+    background: no-repeat center;
+    background-size: 100%;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: #eee 0 0 5px 2px;
   }
 </style>

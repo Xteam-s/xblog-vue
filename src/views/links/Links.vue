@@ -2,25 +2,25 @@
   <div class="main">
     <div class="top-wrap">
       <div class="top-text">XBLOG</div>
-      <image id="downBtn" class="downBtn" onclick="downScroll()" src="../../resources/downBtn.png"></image>
+      <div id="downBtn" class="downBtn" @click="downScroll"></div>
       <div class="custom-background-img"></div>
-    </div>>
+    </div>
     <div id="index-links" class="index-links">
       <div class="xtitle">
         Links
       </div>
-      <div class="blogers">
-        <div v-for="(bloger,index) in blogerList" :key="index" class="bloger">
-          <div class="bloger-card-front">
-            <a :href="bloger.url" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></a>
-            <div class="bloger-name">
-              <span>{{bloger.name}}</span>
+      <div class="bloggers">
+        <div v-for="(blogger,index) in bloggerList" :key="index" class="blogger">
+          <div class="blogger-card-front">
+            <a :href="blogger.url" class="avatar" :style="{ backgroundImage : 'url(' + blogger.imgurl + ')' }"></a>
+            <div class="blogger-name">
+              <span>{{blogger.name}}</span>
             </div>
           </div>
-          <div class="bloger-card-back">
-            <a :href="bloger.url" class="avatar" :style="{ backgroundImage : 'url(' + bloger.imgurl + ')' }"></a>
-            <div class="bloger-intro">
-                <span v-html="bloger.intro"></span>
+          <div class="blogger-card-back">
+            <a :href="blogger.url" class="avatar" :style="{ backgroundImage : 'url(' + blogger.imgurl + ')' }"></a>
+            <div class="blogger-intro">
+                <span v-html="blogger.intro"></span>
             </div>
           </div>
         </div>
@@ -30,11 +30,12 @@
 </template>
 
 <script>
+
   export default {
     name: "Links",
     data() {
       return {
-        blogerList: [{ 
+        bloggerList: [{ 
           name: 'baidu',
           imgurl: 'https://www.baidu.com/img/flexible/logo/pc/result.png',
           url: 'https://baidu.com',
@@ -62,11 +63,16 @@
       }
     },
     methods: {
-
+      downScroll: function () {
+        window.scrollTo({
+          top: 800,
+          behavior: "smooth"
+        });
+      },
     }
   }
 </script>
 
 <style scoped>
-  @import '../../assets/css/Blog.css'
+  @import '../../assets/css/Blog.css';
 </style>

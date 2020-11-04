@@ -15,12 +15,12 @@
     "css-loader": "^4.3.0",
     "editor.md": "^1.5.0",
     "github-markdown-css": "^4.0.0",
-    "highlight.js": "^10.2.0",
     "jquery": "^3.5.1",
     "qs": "^6.9.4",
     "scriptjs": "^2.5.9",
     "vue": "^2.6.11",
-    "vue-markdown-loader": "^0.6.2"
+    "vue-markdown-loader": "^0.6.2",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@babel/runtime": "^7.11.2",
