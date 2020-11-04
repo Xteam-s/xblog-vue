@@ -1,78 +1,33 @@
 <template>
   <div class="markdown-view-box">
-    <link rel="stylesheet" href="/static/editor.md/css/editormd.min.css">
-    <div id="test-editor">
-    </div>
-    <button @click="test">NIHAO</button>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" />
+    <v-md-editor v-model="text" height="500px" @upload-image="uploadImage" :disabled-menus="[]"></v-md-editor>
   </div>
 </template>
 
 <script>
-
-  import $script from 'scriptjs';
-
   export default {
     name: "Editor",
-    props: {
-      editorConfig: {
-        type: Object,
-        default() {
-          return {
-            width: '88%',
-            height: 530,
-            path: '/static/editor.md/lib/', // Autoload modules mode, codemirror, marked... dependents libs path
-            codeFold: true,
-            saveHTMLToTextarea: true,
-            searchReplace: true,
-            htmlDecode: 'style,script,iframe|on*',
-            emoji: true,
-            taskList: true,
-            tocm: true,                  // Using [TOCM]
-            tex: true,                   // 开启科学公式TeX语言支持，默认关闭
-            flowChart: true,             // 开启流程图支持，默认关闭
-            sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
-            imageUpload: true,
-            imageFormats: ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'webp'],
-            imageUploadURL: 'examples/php/upload.php',
-            onload: () => {
-              // eslint-disable-next-line
-              // console.log('onload', this);
-            },
-          };
-        }
-      }
-    },
     data(){
       return {
-        editor: null
+        text: '',
       }
     },
     methods: {
-      initEditor(){
-        // eslint-disable-next-line
-        this.$nextTick((editorMD = window.editormd) => {
-          if (editorMD) {
-            // Vue 异步执行 DOM 更新，template 里面的 script 标签异步创建
-            // 所以，只能在 nextTick 里面初始化 editor.md
-            this.editor = editorMD('test-editor', this.editorConfig);
-          }
-        });
-      },
-      test(){
-        console.log(this.editor.getMarkdown())
-        console.log(this.editor.getHTML())
+      uploadImage(event, insertImage, files){
+        console.log(files);
+
+        // let param = new FormData();
+        // param.append('file',file,file.name);
+        // param.append('chunk', '0')
+        // this.axios.post(
+        //   'file/avatar',
+        //   param
+        // ).then(response => {
+        //   console.log(response.data)
+        // })
       }
     },
-    mounted() {
-      $script([
-        `/static/editor.md/examples/js/jquery.min.js`,
-        `/static/editor.md/examples/js/zepto.min.js`
-      ], () => {
-        $script(`/static/editor.md/editormd.min.js`, () => {
-          this.initEditor();
-        });
-      });
-    }
   }
 </script>
 

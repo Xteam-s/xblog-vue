@@ -22,6 +22,9 @@
         <li class="top-bar-link">
           <router-link to="/x/home">Home</router-link>
         </li>
+        <li class="top-bar-link">
+          <router-link to="/x/article">Article</router-link>
+        </li>
       </ul>
 
     </div>

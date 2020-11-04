@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 
 const Home = () => import('../views/home/Home')
 const Links = () => import('../views/links/Links')
-const About = () => import('../views/about/About')
+const Article = () => import('../views/about/Article')
 //const PostList = () => import('../views/post/PostList')
 const Login = () => import('../views/login/Login')
 const Blog = () => import('../views/Blog/Blog')
@@ -29,8 +29,8 @@ const routes = [
     component: Links
   },
   {
-    path: '/x/about',
-    component: About
+    path: '/x/article',
+    component: Article
   },
   {
     path: '/x/editor',
