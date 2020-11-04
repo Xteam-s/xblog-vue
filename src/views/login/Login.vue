@@ -55,7 +55,7 @@
     methods: {
       submit(){
         this.axios.post(
-          'blogger/login',
+          '/login',
           {
               username: this.username,
               password: this.password

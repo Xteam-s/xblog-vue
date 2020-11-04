@@ -24,6 +24,13 @@ VueMarkdownEditor.use(vuepressTheme);
 Vue.use(VueMarkdownEditor);
 Vue.config.productionTip = false
 
+//
+// var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+// var _highlight = _interopRequireDefault(require("highlight.js/lib/highlight.js"));
+// var _java = _interopRequireDefault(require("highlight.js/lib/languages/java"));
+// _highlight.default.registerLanguage('java',_java.default);
+
+
 new Vue({
   el: '#app',
   router,

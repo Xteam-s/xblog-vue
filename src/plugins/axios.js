@@ -19,6 +19,8 @@ let config = {
 
 const _axios = axios.create(config);
 
+let neptu;
+
 _axios.interceptors.request.use(
   function(config) {
     // Do something before request is sent
@@ -34,9 +36,15 @@ _axios.interceptors.request.use(
 _axios.interceptors.response.use(
   function(response) {
     // Do something with response data
+    console.log(response);
+    neptu = response.headers['neptu'];
+    if(neptu){
+      document.cookie = `sid=${neptu};Path=/;Domain=127.0.0.1`;
+    }
     return response;
   },
   function(error) {
+    console.log(error);
     // Do something with response error
     return Promise.reject(error);
   }
